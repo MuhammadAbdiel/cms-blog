@@ -36,15 +36,8 @@
 
     <main id="main" class="main">
 
-        <div class="pagetitle">
-            <h1>Dashboard</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
-                </ol>
-            </nav>
-        </div>
+        @yield('breadcrumb')
+
         <!-- End Page Title -->
 
         <section class="section dashboard">
@@ -54,7 +47,6 @@
         </section>
 
     </main>
-    <!-- End #main -->
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
@@ -67,8 +59,18 @@
     </footer>
     <!-- End Footer -->
 
+    <!-- End main -->
+
+
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+
+    {{-- Sweet Alert 2 --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- Jquery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- Vendor JS Files -->
     <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -83,6 +85,7 @@
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
 
+    @yield('script')
 </body>
 
 </html>

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use Illuminate\Http\Request;
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+use App\Models\Template;
+use App\Http\Requests\StoreTemplateRequest;
+use App\Http\Requests\UpdateTemplateRequest;
 
-class PostController extends Controller
+class TemplateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('dashboard.posts.index', [
-            'title' => 'Posts',
-            'posts' => Post::latest()->get()
-        ]);
+        //
     }
 
     /**
@@ -29,18 +25,16 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('dashboard.posts.create', [
-            'title' => 'Create Post',
-        ]);
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePostRequest  $request
+     * @param  \App\Http\Requests\StoreTemplateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTemplateRequest $request)
     {
         //
     }
@@ -48,10 +42,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Template $template)
     {
         //
     }
@@ -59,10 +53,10 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Template $template)
     {
         //
     }
@@ -70,11 +64,11 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePostRequest  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Http\Requests\UpdateTemplateRequest  $request
+     * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(UpdateTemplateRequest $request, Template $template)
     {
         //
     }
@@ -82,12 +76,11 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Template $template)
     {
-        Post::destroy($post->id);
-        return redirect('/dashboard/posts');
+        //
     }
 }

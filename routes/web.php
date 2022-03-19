@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\DashboardHomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\DashboardHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,5 @@ Route::get('/categories', [HomeController::class, 'categories']);
 Route::get('/authors', [HomeController::class, 'authors']);
 Route::get('/{post}', [HomeController::class, 'post']);
 
-Route::get('/dashboard', [DashboardHomeController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/home', [DashboardHomeController::class, 'index'])->middleware('auth');
+Route::resource('/dashboard/posts', PostController::class)->middleware('auth');
