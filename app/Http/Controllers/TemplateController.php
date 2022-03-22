@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Template;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreTemplateRequest;
 use App\Http\Requests\UpdateTemplateRequest;
 
@@ -15,7 +16,10 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.templates.index', [
+            'title' => 'Templates',
+            'templates' => Template::latest()->get(),
+        ]);
     }
 
     /**
@@ -25,7 +29,9 @@ class TemplateController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.templates.create', [
+            'title' => 'Create Template',
+        ]);
     }
 
     /**
@@ -34,9 +40,15 @@ class TemplateController extends Controller
      * @param  \App\Http\Requests\StoreTemplateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTemplateRequest $request)
+    public function store(Request $request)
     {
-        //
+        $template = new Template;
+        $template->user_id = auth()->user()->id;
+        $template->name = $request->name;
+        $template->lb_content = $request->content;
+        $template->save();
+
+        return redirect('/dashboard/templates');
     }
 
     /**
@@ -47,7 +59,10 @@ class TemplateController extends Controller
      */
     public function show(Template $template)
     {
-        //
+        return view('dashboard.templates.show', [
+            'title' => 'Show Template',
+            'template' => $template,
+        ]);
     }
 
     /**
@@ -68,7 +83,7 @@ class TemplateController extends Controller
      * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTemplateRequest $request, Template $template)
+    public function update(Request $request, Template $template)
     {
         //
     }
@@ -81,6 +96,7 @@ class TemplateController extends Controller
      */
     public function destroy(Template $template)
     {
-        //
+        Template::destroy($template->id);
+        return redirect('/dashboard/templates');
     }
 }

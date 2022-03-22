@@ -36,7 +36,8 @@
         <!-- End Register Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link {{ Request::is('dashboard/templates*') ? '' : 'collapsed' }}"
+                href="/dashboard/templates">
                 <i class="bi bi-layout-text-window-reverse"></i>
                 <span>Templates</span>
             </a>

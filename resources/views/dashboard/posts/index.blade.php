@@ -20,7 +20,7 @@
             <div class="card-body">
                 <h5 class="card-title">Posts</h5>
 
-                <a class="btn btn-primary" href="/dashboard/posts/create"><i class="bi bi-plus-square"></i> Add New
+                <a class="btn btn-primary" href="/dashboard/select"><i class="bi bi-plus-square"></i> Add New
                     Post</a>
                 <hr>
 

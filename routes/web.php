@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DashboardHomeController;
+use App\Http\Controllers\TemplateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,6 @@ Route::get('/authors', [HomeController::class, 'authors']);
 Route::get('/{post}', [HomeController::class, 'post']);
 
 Route::get('/dashboard/home', [DashboardHomeController::class, 'index'])->middleware('auth');
+Route::resource('/dashboard/templates', TemplateController::class)->middleware('auth');
 Route::resource('/dashboard/posts', PostController::class)->middleware('auth');
+Route::get('/dashboard/select', [PostController::class, 'select'])->middleware('auth');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Template;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -31,6 +32,14 @@ class PostController extends Controller
     {
         return view('dashboard.posts.create', [
             'title' => 'Create Post',
+        ]);
+    }
+
+    public function select()
+    {
+        return view('dashboard.posts.template', [
+            'title' => 'Select Template',
+            'templates' => Template::latest()->get()
         ]);
     }
 

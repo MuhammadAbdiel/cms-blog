@@ -71,4 +71,3 @@
     {{ $posts->links() }}
 </div>
 @endsection
-{{-- <textarea id="[id_here]" name="[name_here]" hidden></textarea> --}}

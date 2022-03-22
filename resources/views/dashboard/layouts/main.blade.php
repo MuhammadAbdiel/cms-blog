@@ -26,6 +26,13 @@
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
+
+    {{-- Laraberg CSS --}}
+    <link rel="stylesheet" href="{{asset('vendor/laraberg/css/laraberg.css')}}">
+
+    {{-- Froala Editor CSS --}}
+    <link href='https://cdn.jsdelivr.net/npm/froala-editor@4.0.8/css/froala_editor.pkgd.min.css' rel='stylesheet'
+        type='text/css' />
 </head>
 
 <body>
@@ -64,6 +71,18 @@
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+
+    {{-- Froala Editor JS --}}
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@4.0.8/js/froala_editor.pkgd.min.js'>
+    </script>
+
+    <script src="https://unpkg.com/react@16.8.6/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js"></script>
+
+    {{-- Laraberg JS --}}
+    <script src="{{ asset('vendor/laraberg/js/laraberg.js') }}"></script>
+
+    @yield('laraberg')
 
     {{-- Sweet Alert 2 --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
