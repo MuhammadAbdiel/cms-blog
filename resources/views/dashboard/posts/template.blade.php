@@ -35,7 +35,10 @@
                                 <h5 class="card-title">{{ $template->name }}</h5>
                                 <p class="card-text"></p>
                                 <a href="/dashboard/templates/{{ $template->id }}" class="badge bg-info">Show</a>
-                                <a href="#" class="badge bg-warning">Edit</a>
+                                <form action="/dashboard/posts" method="post" class="d-inline-block">
+                                    @csrf
+                                    <button type="submit" class="badge bg-success border-0">Select Template</button>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -20,8 +20,8 @@
             <div class="card-body">
                 <h5 class="card-title">Posts</h5>
 
-                <a class="btn btn-primary" href="/dashboard/select"><i class="bi bi-plus-square"></i> Add New
-                    Post</a>
+                <a class="btn btn-primary" href="/dashboard/posts/create"><i class="bi bi-cursor-fill"></i> Select
+                    Template</a>
                 <hr>
 
                 <!-- Table with stripped rows -->
@@ -43,7 +43,8 @@
                             <td>{{ $post->updated_at }}</td>
                             <td>
                                 <a href="#" class="btn btn-info mb-1"><i class="bi bi-eye-fill"></i> Show</a><br>
-                                <a href="#" class="btn btn-warning mb-1"><i class="bi bi-pencil-square"></i>
+                                <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning mb-1"><i
+                                        class="bi bi-pencil-square"></i>
                                     Edit</a>
                                 {{-- <br>
                                 <a href="#" class="btn btn-danger delete" data-id="{{ $post->id }}"

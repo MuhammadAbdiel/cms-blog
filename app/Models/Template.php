@@ -19,6 +19,6 @@ class Template extends Model
 
     public function posts()
     {
-        return $this->hasMany(Post::class, 'template_id');
+        return $this->hasMany(Post::class);
     }
 }

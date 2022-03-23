@@ -31,7 +31,7 @@ class HomeController extends Controller
         return view('home', [
             'title' => 'Home',
             'heading' => $heading,
-            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(9)->withQueryString(),
+            'posts' => Post::latest()->where('slug', '!=', null)->filter(request(['search', 'category', 'author']))->paginate(9)->withQueryString(),
         ]);
     }
 

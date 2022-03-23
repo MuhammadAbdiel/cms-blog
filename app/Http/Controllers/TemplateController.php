@@ -42,6 +42,11 @@ class TemplateController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|unique:templates|max:255',
+            'content' => 'required'
+        ]);
+
         $template = new Template;
         $template->user_id = auth()->user()->id;
         $template->name = $request->name;
@@ -73,7 +78,10 @@ class TemplateController extends Controller
      */
     public function edit(Template $template)
     {
-        //
+        return view('dashboard.templates.edit', [
+            'title' => 'Edit Template',
+            'template' => $template,
+        ]);
     }
 
     /**

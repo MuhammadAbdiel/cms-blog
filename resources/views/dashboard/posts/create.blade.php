@@ -7,8 +7,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/dashboard/home">Home</a></li>
             <li class="breadcrumb-item"><a href="/dashboard/posts">Posts</a></li>
-            <li class="breadcrumb-item"><a href="/dashboard/select">Select Template</a></li>
-            <li class="breadcrumb-item active">Add New Posts</li>
+            <li class="breadcrumb-item active">Select Template</li>
         </ol>
     </nav>
 </div>
@@ -16,32 +15,39 @@
 
 @section('content')
 <div class="row">
-    <div class="col-12">
+    <div class="col-lg-12">
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Add New Post</h5>
+                <h5 class="card-title">Select Templates</h5>
+                <hr>
 
-                {{-- <form class="row g-3">
-                    <div class="col-12">
-                        <label for="inputNanme4" class="form-label">Your Name</label>
-                        <input type="text" class="form-control" id="inputNanme4">
+                <div class="row justify-content-center">
+
+                    @foreach ($templates as $template)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $template->name }}</h5>
+                                <p class="card-text"></p>
+                                <a href="/dashboard/templates/{{ $template->id }}" class="badge bg-info">Show</a>
+                                <form action="/dashboard/posts" method="post" class="d-inline-block">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $template->id }}">
+                                    <button type="submit" class="badge bg-success border-0">Select Template</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-12">
-                        <textarea id="[id_here]" name="[name_here]" hidden></textarea>
-                    </div>
-                    <div class="text-center">
-                        <a href="/dashboard/posts" class="btn btn-danger">Back</a>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form> --}}
+                    @endforeach
+
+                </div>
+
 
             </div>
         </div>
+
     </div>
 </div>
-@endsection
-
-@section('script')
-
 @endsection

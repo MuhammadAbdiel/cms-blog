@@ -34,7 +34,8 @@
                                 <h5 class="card-title">{{ $template->name }}</h5>
                                 <p class="card-text"></p>
                                 <a href="/dashboard/templates/{{ $template->id }}" class="badge bg-info">Show</a>
-                                <a href="#" class="badge bg-warning">Edit</a>
+                                <a href="/dashboard/templates/{{ $template->id }}/edit"
+                                    class="badge bg-warning">Edit</a>
                                 <form class="d-inline-block" id="data-{{ $template->id }}"
                                     action="/dashboard/templates/{{ $template->id }}" method="post">
                                     @csrf
