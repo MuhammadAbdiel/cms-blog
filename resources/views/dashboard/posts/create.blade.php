@@ -35,6 +35,7 @@
                                 <form action="/dashboard/posts" method="post" class="d-inline-block">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $template->id }}">
+                                    <input type="hidden" name="content" value="{{ $template->lb_raw_content }}">
                                     <button type="submit" class="badge bg-success border-0">Select Template</button>
                                 </form>
                             </div>
@@ -42,6 +43,10 @@
                     </div>
                     @endforeach
 
+                </div>
+
+                <div class="text-center">
+                    <a href="/dashboard/posts" class="btn btn-danger">Back</a>
                 </div>
 
 

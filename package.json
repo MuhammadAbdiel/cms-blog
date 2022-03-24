@@ -21,6 +21,7 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "froala-editor": "^4.0.10"
+        "froala-editor": "^4.0.10",
+        "sweetalert2": "^11.4.6"
     }
 }

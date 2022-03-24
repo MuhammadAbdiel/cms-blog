@@ -105,6 +105,8 @@
     <script src="/assets/js/main.js"></script>
 
     @yield('script')
+
+    @include('sweetalert::alert')
 </body>
 
 </html>

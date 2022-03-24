@@ -12,7 +12,7 @@
         <img class="img-fluid" src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" alt="">
         @endif
         <article class="my-3 fs-6">
-            {!! $post->body !!}
+            {!! $post->lb_raw_content !!}
         </article>
     </div>
 </div>

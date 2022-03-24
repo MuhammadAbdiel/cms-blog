@@ -45,17 +45,13 @@
                     </div>
                     <div class="text-center">
                         <a href="/dashboard/templates" class="btn btn-danger">Back</a>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-success">Update</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-@endsection
-
-@section('script')
-
 @endsection
 
 @section('laraberg')

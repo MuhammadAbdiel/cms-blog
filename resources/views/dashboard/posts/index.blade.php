@@ -42,15 +42,11 @@
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->updated_at }}</td>
                             <td>
-                                <a href="#" class="btn btn-info mb-1"><i class="bi bi-eye-fill"></i> Show</a><br>
+                                <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-info mb-1"><i
+                                        class="bi bi-eye-fill"></i> Show</a><br>
                                 <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning mb-1"><i
                                         class="bi bi-pencil-square"></i>
                                     Edit</a>
-                                {{-- <br>
-                                <a href="#" class="btn btn-danger delete" data-id="{{ $post->id }}"
-                                    data-title="{{ $post->title }}" data-slug="{{ $post->slug }}"><i
-                                        class="bi bi-trash"></i>
-                                    Delete</a> --}}
                                 <form id="data-{{ $post->slug }}" action="/dashboard/posts/{{ $post->slug }}"
                                     method="post">
                                     @csrf

@@ -70,7 +70,7 @@
                     </div>
                     <div class="text-center">
                         <a href="/dashboard/posts" class="btn btn-danger">Back</a>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-success">Update</button>
                     </div>
                 </form>
             </div>

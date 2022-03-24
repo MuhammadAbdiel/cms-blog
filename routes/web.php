@@ -28,3 +28,4 @@ Route::get('/dashboard/home', [DashboardHomeController::class, 'index'])->middle
 Route::get('/dashboard/posts/checkSlug', [PostController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/posts', PostController::class)->middleware('auth');
 Route::resource('/dashboard/templates', TemplateController::class)->middleware('auth');
+Route::resource('/dashboard/categories', CategoryController::class)->middleware('auth');

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Template;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class PostController extends Controller
@@ -49,9 +50,10 @@ class PostController extends Controller
         $post->user_id = auth()->user()->id;
         $post->template_id = $request->id;
         $post->slug = Str::slug('post slug');
+        $post->lb_content = $request->content;
         $post->save();
 
-        return redirect('/dashboard/posts');
+        return redirect('/dashboard/posts')->with('success', 'Post created successfully!');
     }
 
     /**
@@ -62,7 +64,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('dashboard.posts.show', [
+            'title' => 'Show Post',
+            'post' => $post
+        ]);
     }
 
     /**
@@ -109,7 +114,7 @@ class PostController extends Controller
         $post->lb_content = $request->content;
         $post->update();
 
-        return redirect('/dashboard/posts');
+        return redirect('/dashboard/posts')->with('success', 'Post updated successfully!');
     }
 
     /**

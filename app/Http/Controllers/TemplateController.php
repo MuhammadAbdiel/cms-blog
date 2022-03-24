@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Template;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreTemplateRequest;
 use App\Http\Requests\UpdateTemplateRequest;
 
@@ -53,7 +54,7 @@ class TemplateController extends Controller
         $template->lb_content = $request->content;
         $template->save();
 
-        return redirect('/dashboard/templates');
+        return redirect('/dashboard/templates')->with('success', 'Template created successfully!');
     }
 
     /**
@@ -93,7 +94,23 @@ class TemplateController extends Controller
      */
     public function update(Request $request, Template $template)
     {
-        //
+        $request->validate([
+            // 'name' => 'required|unique:templates|max:255',
+            'content' => 'required'
+        ]);
+
+        if ($template->name != $request->name) {
+            $request->validate([
+                'name' => 'required|unique:templates|max:255',
+            ]);
+
+            $template->name = $request->name;
+        }
+
+        $template->lb_content = $request->content;
+        $template->update();
+
+        return redirect('/dashboard/templates')->with('success', 'Template updated successfully!');
     }
 
     /**
