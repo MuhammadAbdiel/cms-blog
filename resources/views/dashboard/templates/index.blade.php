@@ -32,6 +32,7 @@
                             <img src="" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $template->name }}</h5>
+                                <img src="https://source.unsplash.com/500x400?template" class="card-img-top mb-3">
                                 <p class="card-text"></p>
                                 <a href="/dashboard/templates/{{ $template->id }}" class="badge bg-info">Show</a>
                                 <a href="/dashboard/templates/{{ $template->id }}/edit"

@@ -24,8 +24,38 @@
                     Template</a>
                 <hr>
 
+                <div class="row justify-content-center">
+
+                    @foreach ($posts as $post)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $post->title }}</h5>
+                                <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}"
+                                    class="card-img-top mb-3">
+                                <p class="card-text">{!! $post->excerpt !!}</p>
+                                <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info">Show</a>
+                                <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning">Edit</a>
+                                <form class="d-inline-block" id="data-{{ $post->slug }}"
+                                    action="/dashboard/posts/{{ $post->slug }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" data-name="{{ $post->name }}" data-slug="{{ $post->slug }}"
+                                        class="badge bg-danger border-0 delete">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+
+                </div>
+                <div class="d-flex justify-content-end">
+                    {{ $posts->links() }}
+                </div>
+
                 <!-- Table with stripped rows -->
-                <table class="table datatable">
+                {{-- <table class="table datatable">
                     <thead>
                         <tr>
                             <th scope="col">No.</th>
@@ -60,7 +90,7 @@
                         @endforeach
 
                     </tbody>
-                </table>
+                </table> --}}
                 <!-- End Table with stripped rows -->
 
             </div>

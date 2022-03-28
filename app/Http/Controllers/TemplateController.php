@@ -95,7 +95,6 @@ class TemplateController extends Controller
     public function update(Request $request, Template $template)
     {
         $request->validate([
-            // 'name' => 'required|unique:templates|max:255',
             'content' => 'required'
         ]);
 

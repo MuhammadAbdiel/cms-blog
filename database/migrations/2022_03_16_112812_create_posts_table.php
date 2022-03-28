@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('excerpt')->nullable();
             $table->text('body')->nullable();
+            $table->text('thumbnail')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

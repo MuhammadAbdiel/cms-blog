@@ -28,7 +28,8 @@
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link {{ Request::is('dashboard/categories*') ? '' : 'collapsed' }}"
+                href="/dashboard/categories">
                 <i class="bi bi-card-list"></i>
                 <span>Categories</span>
             </a>

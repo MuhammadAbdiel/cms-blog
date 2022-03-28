@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 
@@ -15,7 +16,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.categories.index', [
+            'title' => 'Categories',
+            'categories' => Category::latest()->get()
+        ]);
     }
 
     /**
@@ -34,7 +38,7 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -68,7 +72,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(Request $request, Category $category)
     {
         //
     }
