@@ -27,6 +27,7 @@ Route::get('/{post}', [HomeController::class, 'post']);
 
 Route::get('/dashboard/home', [DashboardHomeController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/posts/checkSlug', [PostController::class, 'checkSlug'])->middleware('auth');
+Route::get('/dashboard/categories/checkSlug', [CategoryController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/posts', PostController::class)->middleware('auth');
 Route::resource('/dashboard/templates', TemplateController::class)->middleware('auth');
 Route::resource('/dashboard/categories', CategoryController::class)->middleware('auth');

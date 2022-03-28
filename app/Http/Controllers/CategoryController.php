@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
@@ -29,7 +30,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.categories.create', [
+            'title' => 'Create Category'
+        ]);
     }
 
     /**
@@ -40,7 +43,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'name' => 'required|max:255',
+            'slug' => 'required|unique:categories'
+        ]);
+
+        Category::create($validateData);
+        return redirect('/dashboard/categories')->with('success', 'Category created successfully!');
     }
 
     /**
@@ -85,6 +94,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
+        return redirect('/dashboard/categories');
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = Str::slug($request->name);
+        return response()->json(['slug' => $slug]);
     }
 }
