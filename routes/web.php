@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardHomeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,5 @@ Route::get('/dashboard/posts/checkSlug', [PostController::class, 'checkSlug'])->
 Route::get('/dashboard/categories/checkSlug', [CategoryController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/posts', PostController::class)->middleware('auth');
 Route::resource('/dashboard/templates', TemplateController::class)->middleware('auth');
-Route::resource('/dashboard/categories', CategoryController::class)->middleware('auth');
+Route::resource('/dashboard/categories', CategoryController::class)->middleware('auth')->except(['show']);
+Route::resource('/dashboard/users', UserController::class)->middleware('auth')->except(['show', 'create', 'store', 'edit', 'update']);

@@ -71,7 +71,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('dashboard.categories.edit', [
+            'title' => 'Edit Category',
+            'category' => $category
+        ]);
     }
 
     /**
@@ -83,7 +86,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $rules = [
+            'name' => 'required|max:255',
+        ];
+
+        if ($category->slug != $request->slug) {
+            $rules['slug'] = 'required|unique:categories';
+        }
+
+        $validateData = $request->validate($rules);
+
+        Category::where('id', $category->id)->update($validateData);
+        return redirect('/dashboard/categories')->with('success', 'Category updated successfully!');
     }
 
     /**

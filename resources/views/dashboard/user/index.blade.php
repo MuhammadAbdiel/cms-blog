@@ -2,11 +2,11 @@
 
 @section('breadcrumb')
 <div class="pagetitle">
-    <h1>Categories</h1>
+    <h1>Users</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/dashboard/home">Home</a></li>
-            <li class="breadcrumb-item active">Categories</li>
+            <li class="breadcrumb-item active">Users</li>
         </ol>
     </nav>
 </div>
@@ -18,11 +18,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Categories</h5>
-
-                <a class="btn btn-primary" href="/dashboard/categories/create"><i class="bi bi-plus-square"></i> Add New
-                    Category</a>
-                <hr>
+                <h5 class="card-title">Users</h5>
 
                 <!-- Table with stripped rows -->
                 <table class="table datatable">
@@ -30,28 +26,50 @@
                         <tr>
                             <th scope="col">No.</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Posts</th>
+                            <th scope="col">Role</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        @foreach ($categories as $category)
+                        @foreach ($users as $user)
                         <tr>
+
+                            @php
+                            $post = $user->posts()->count();
+                            @endphp
+
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $category->name }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->username }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td align="center">
+
+                                @if ($user->is_admin == 1)
+                                <span class="badge bg-success rounded-pill">Admin</span>
+                                @else
+                                <span class="badge bg-info rounded-pill">User</span>
+                                @endif
+
+                            </td>
+                            <td align="center"><span class="badge bg-primary rounded-pill">{{ $post }}</span></td>
                             <td>
-                                <a href="/dashboard/categories/{{ $category->slug }}/edit"
-                                    class="btn btn-warning mb-1"><i class="bi bi-pencil-square"></i>
-                                    Edit</a>
-                                <form class="d-inline-block" id="data-{{ $category->slug }}"
-                                    action="/dashboard/categories/{{ $category->slug }}" method="post">
+
+                                @if ($user->is_admin == 0)
+                                <form class="d-inline-block" id="data-{{ $user->username }}"
+                                    action="/dashboard/users/{{ $user->username }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" data-name="{{ $category->name }}"
-                                        data-slug="{{ $category->slug }}" class="btn btn-danger delete"><i
+                                    <button type="submit" data-name="{{ $user->name }}"
+                                        data-username="{{ $user->username }}" class="btn btn-danger delete"><i
                                             class="bi bi-trash"></i>
                                         Delete</button>
                                 </form>
+                                @endif
+
                             </td>
                         </tr>
                         @endforeach
@@ -74,11 +92,11 @@
         dBtn.addEventListener('click', function (event) {
             event.preventDefault();
 
-            const categorySlug = this.dataset.slug;
-            const categoryName = this.dataset.name;
+            const userUsername = this.dataset.username;
+            const userName = this.dataset.name;
             Swal.fire({
                 title: 'Are you sure to delete this data?',
-                text: "You will delete data with name: " + categoryName,
+                text: "You will delete data with name: " + userName,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -86,7 +104,7 @@
                 confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            const dataSlug = document.getElementById('data-' + categorySlug);
+                            const dataSlug = document.getElementById('data-' + userUsername);
                             dataSlug.submit();
                             
                             Swal.fire(
