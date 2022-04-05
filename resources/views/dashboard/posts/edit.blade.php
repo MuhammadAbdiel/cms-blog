@@ -20,7 +20,8 @@
             <div class="card-body">
                 <h5 class="card-title">Edit Post</h5>
 
-                <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="row g-3">
+                <form action="/dashboard/posts/{{ $post->slug }}" method="POST" enctype="multipart/form-data"
+                    class="row g-3">
                     @csrf
                     @method('PUT')
                     {{-- <input type="hidden" name="slug" value="{{ $post->slug }}"> --}}
@@ -59,6 +60,25 @@
                         </select>
                     </div>
                     <div class="col-12">
+                        <label for="thumbnail" class="form-label">Thumbnail</label>
+                        <input type="hidden" name="oldThumbnail" value="{{ $post->thumbnail }}">
+
+                        @if ($post->thumbnail)
+                        <img src="{{ asset('storage/' . $post->thumbnail) }}" class="img-preview img-fluid mb-3 d-block"
+                            width="300">
+                        @else
+                        <img class="img-preview img-fluid mb-3" width="300">
+                        @endif
+
+                        <input class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail"
+                            type="file" id="thumbnail" onchange="previewImage()">
+                        @error('thumbnail')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="col-12">
                         @error('content')
                         <div class="alert alert-danger alert-dismissible fade show mt2" role="alert">
                             <strong>{{ $message }}</strong>
@@ -87,6 +107,20 @@
         .then(response => response.json())
         .then(data => slug.value = data.slug)
     });
+
+    function previewImage() {
+        const imgPreview = document.querySelector('.img-preview');
+        const thumbnail = document.querySelector('#thumbnail');
+        
+        imgPreview.style.display = 'block';
+        
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(thumbnail.files[0]);
+        
+        oFReader.onload = function (oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        };
+    }
 </script>
 @endsection
 

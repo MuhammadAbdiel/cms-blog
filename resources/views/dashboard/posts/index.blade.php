@@ -32,8 +32,14 @@
                             <img src="" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $post->title }}</h5>
+
+                                @if ($post->thumbnail)
+                                <img src="{{ asset('storage/' . $post->thumbnail) }}" class="card-img-top mb-3">
+                                @else
                                 <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}"
                                     class="card-img-top mb-3">
+                                @endif
+
                                 <p class="card-text">{!! $post->excerpt !!}</p>
                                 <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info">Show</a>
                                 <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning">Edit</a>

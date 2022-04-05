@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Template;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreTemplateRequest;
 use App\Http\Requests\UpdateTemplateRequest;
@@ -45,6 +46,7 @@ class TemplateController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:templates|max:255',
+            'thumbnail' => 'image|file|max:5120',
             'content' => 'required'
         ]);
 
@@ -52,6 +54,11 @@ class TemplateController extends Controller
         $template->user_id = auth()->user()->id;
         $template->name = $request->name;
         $template->lb_content = $request->content;
+
+        if ($request->file('thumbnail')) {
+            $template->thumbnail = $request->file('thumbnail')->store('template-thumbnails');
+        }
+
         $template->save();
 
         return redirect('/dashboard/templates')->with('success', 'Template created successfully!');
@@ -95,6 +102,7 @@ class TemplateController extends Controller
     public function update(Request $request, Template $template)
     {
         $request->validate([
+            'thumbnail' => 'image|file|max:5120',
             'content' => 'required'
         ]);
 
@@ -104,6 +112,13 @@ class TemplateController extends Controller
             ]);
 
             $template->name = $request->name;
+        }
+
+        if ($request->file('thumbnail')) {
+            if ($request->oldThumbnail) {
+                Storage::delete($request->oldThumbnail);
+            }
+            $template->thumbnail = $request->file('thumbnail')->store('template-thumbnails');
         }
 
         $template->lb_content = $request->content;
@@ -120,6 +135,9 @@ class TemplateController extends Controller
      */
     public function destroy(Template $template)
     {
+        if ($template->thumbnail) {
+            Storage::delete($template->thumbnail);
+        }
         Template::destroy($template->id);
         return redirect('/dashboard/templates');
     }

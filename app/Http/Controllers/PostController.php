@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Template;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -50,6 +51,7 @@ class PostController extends Controller
         $post->user_id = auth()->user()->id;
         $post->template_id = $request->id;
         $post->slug = Str::slug('post slug');
+        $post->thumbnail = $request->thumbnail;
         $post->lb_content = $request->content;
         $post->save();
 
@@ -96,7 +98,8 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|max:255',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'thumbnail' => 'image|file|max:5120',
         ]);
 
         $post->user_id = auth()->user()->id;
@@ -112,6 +115,18 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
         $post->excerpt = Str::limit(strip_tags($post->template->lb_content), 200);
         $post->lb_content = $request->content;
+
+        $postThumbnail = explode('/', $post->thumbnail);
+
+        if ($request->file('thumbnail')) {
+            if (Storage::disk()->exists('post-thumbnails/' . $postThumbnail[1])) {
+                if ($request->oldThumbnail) {
+                    Storage::delete($request->oldThumbnail);
+                }
+            }
+            $post->thumbnail = $request->file('thumbnail')->store('post-thumbnails');
+        }
+
         $post->update();
 
         return redirect('/dashboard/posts')->with('success', 'Post updated successfully!');
@@ -125,6 +140,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if ($post->thumbnail) {
+            Storage::delete($post->thumbnail);
+        }
         Post::destroy($post->id);
         return redirect('/dashboard/posts');
     }
