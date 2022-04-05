@@ -28,7 +28,13 @@
     <div class="position-absolute px-3 py-2 text-white" style="background-color: rgba(0, 0, 0, 0.7)"><a
             class="text-decoration-none text-white" href="/?category={{ $posts[0]->category->slug }}">
             {{ $posts[0]->category->name }}</a></div>
+
+    @if ($posts[0]->thumbnail)
+    <img src="{{ asset('storage/' . $posts[0]->thumbnail) }}" class="card-img-top" height="400" width="1200">
+    @else
     <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}" class="card-img-top">
+    @endif
+
     <div class="card-body text-center">
         <h5 class="card-title">{{ $posts[0]->title }}</h5>
         <small>

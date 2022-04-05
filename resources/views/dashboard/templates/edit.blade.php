@@ -92,6 +92,6 @@
 
 @section('laraberg')
 <script>
-    Laraberg.init('content')
+    Laraberg.init('content', { laravelFilemanager: true })
 </script>
 @endsection
