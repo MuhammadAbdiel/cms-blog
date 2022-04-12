@@ -51,6 +51,29 @@
 
             @yield('content')
 
+            <div class="modal fade" id="basicModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to sign out?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">Sign out</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
     </main>

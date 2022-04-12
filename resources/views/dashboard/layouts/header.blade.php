@@ -21,7 +21,7 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <img src="/assets/img/profile.png" alt="Profile" class="rounded-circle" width="30">
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->name }}</span>
                 </a>
                 <!-- End Profile Image Icon -->
@@ -35,7 +35,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="/dashboard/profile">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>
@@ -44,7 +44,7 @@
                         <hr class="dropdown-divider">
                     </li>
 
-                    <li>
+                    {{-- <li>
                         <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                             <i class="bi bi-gear"></i>
                             <span>Account Settings</span>
@@ -52,17 +52,13 @@
                     </li>
                     <li>
                         <hr class="dropdown-divider">
-                    </li>
+                    </li> --}}
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
+                        <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#basicModal">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign out</span>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
                         </a>
                     </li>
 
