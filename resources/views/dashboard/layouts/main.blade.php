@@ -33,6 +33,8 @@
     {{-- Froala Editor CSS --}}
     <link href='https://cdn.jsdelivr.net/npm/froala-editor@4.0.8/css/froala_editor.pkgd.min.css' rel='stylesheet'
         type='text/css' />
+
+    @yield('style')
 </head>
 
 <body>

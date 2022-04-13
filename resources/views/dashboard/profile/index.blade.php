@@ -1,5 +1,13 @@
 @extends('dashboard.layouts.main')
 
+@section('style')
+<style>
+    #profileImage::before {
+        content: "";
+    }
+</style>
+@endsection
+
 @section('breadcrumb')
 <div class="pagetitle">
     <h1>Profile</h1>
@@ -19,9 +27,14 @@
         <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                <img src="/assets/img/profile.png" alt="Profile" class="rounded-circle mb-3" width="100">
+                @if ($user->profileImage)
+                <img src="{{ asset('storage/' . $user->profileImage) }}" class="rounded-circle mb-3" alt="Profile"
+                    width="100" height="100">
+                @else
+                <img src="/assets/img/profile.png" class="rounded-circle mb-3" alt="Profile" width="100" height="100">
+                @endif
+
                 <h2 class="text-center">{{ $user->name }}</h2>
-                {{-- <h3>Web Designer</h3> --}}
                 <div class="social-links mt-2">
                     <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
                     <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
@@ -100,25 +113,51 @@
                     <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                         <!-- Profile Edit Form -->
-                        <form>
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="row mb-3">
                                 <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                 <div class="col-md-8 col-lg-9 text-center">
-                                    <img src="/assets/img/profile.png" alt="Profile" width="100">
+
+                                    <div class="d-flex justify-content-center">
+
+                                        @if ($user->profileImage)
+                                        <input type="hidden" name="oldImage" value="{{ $user->profileImage }}">
+                                        <img src="{{ asset('storage/' . $user->profileImage) }}" class="rounded-circle"
+                                            alt="Profile" width="100" height="100">
+                                        @else
+                                        <img src="/assets/img/profile.png" class="rounded-circle img-preview"
+                                            alt="Profile" width="100" height="100">
+                                        @endif
+
+                                    </div>
+
                                     <div class="pt-2">
-                                        <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i
-                                                class="bi bi-upload"></i></a>
-                                        <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i
-                                                class="bi bi-trash"></i></a>
+                                        <form action="/dashboard/profile/image/{{ auth()->user()->id }}" method="POST"
+                                            enctype="multipart/form-data" class="d-inline-block">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="file" name="profileImage" class="form-control mt-2 mb-2"
+                                                id="profileImage" onchange="previewImage()">
+                                            <button type="submit" class="btn btn-primary btn-sm"><i
+                                                    class="bi bi-upload"></i></button>
+                                        </form>
+                                        {{-- <form class="d-inline-block" id="delete-photo" action="" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form> --}}
+                                        <a onclick="event.preventDefault();
+                                                    document.getElementById('delete-photo').submit();"
+                                            class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                                <label for="name" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                                 <div class="col-md-8 col-lg-9">
-                                    <input name="fullName" type="text" class="form-control" id="fullName"
-                                        value="Kevin Anderson">
+                                    <input name="name" type="text" class="form-control" id="name"
+                                        value="{{ old('name', $user->name) }}">
                                 </div>
                             </div>
 
@@ -126,22 +165,23 @@
                                 <label for="username" class="col-md-4 col-lg-3 col-form-label">Username</label>
                                 <div class="col-md-8 col-lg-9">
                                     <input name="username" type="text" class="form-control" id="username"
-                                        value="(436) 486-3538 x29071">
+                                        value="{{ old('name', $user->username) }}">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                 <div class="col-md-8 col-lg-9">
                                     <input name="email" type="email" class="form-control" id="Email"
-                                        value="k.anderson@example.com">
+                                        value="{{ old('name', $user->email) }}">
                                 </div>
                             </div>
 
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button name="submit" type="submit" class="btn btn-primary">Save Changes</button>
                             </div>
-                        </form><!-- End Profile Edit Form -->
+                        </form>
+                        <!-- End Profile Edit Form -->
 
                     </div>
 
@@ -175,14 +215,32 @@
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Change Password</button>
                             </div>
-                        </form><!-- End Change Password Form -->
+                        </form>
+                        <!-- End Change Password Form -->
 
                     </div>
 
-                </div><!-- End Bordered Tabs -->
+                </div>
+                <!-- End Bordered Tabs -->
 
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function previewImage() {
+        const imgPreview = document.querySelector('.img-preview');
+        const profileImage = document.querySelector('#profileImage');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(profileImage.files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        };
+    }
+</script>
 @endsection
