@@ -140,8 +140,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if ($post->thumbnail) {
-            Storage::delete($post->thumbnail);
+        $postThumbnail = explode('/', $post->thumbnail);
+
+        if (Storage::disk()->exists('post-thumbnails/' . $postThumbnail[1])) {
+            if ($post->thumbnail) {
+                Storage::delete($post->thumbnail);
+            }
         }
         Post::destroy($post->id);
         return redirect('/dashboard/posts');
