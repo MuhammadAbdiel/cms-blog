@@ -35,8 +35,7 @@ Route::resource('/dashboard/templates', TemplateController::class)->middleware('
 Route::resource('/dashboard/categories', CategoryController::class)->middleware('auth')->except(['show']);
 Route::resource('/dashboard/users', UserController::class)->middleware('auth')->except(['show', 'create', 'store', 'edit', 'update']);
 
-Route::get('/dashboard/profile', [ProfileController::class, 'profile'])->middleware('auth');
-Route::put('/dashboard/profile/image/{user:id}', [ProfileController::class, 'update'])->middleware('auth');
+Route::resource('/dashboard/profile/user', ProfileController::class)->middleware('auth')->except(['create', 'store', 'edit']);
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();

@@ -47,11 +47,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $requestThumbnail = explode('/', $request->thumbnail);
+
+        $data = '{
+            "directory": "' . $requestThumbnail[0] . '",
+            "file": "' . $requestThumbnail[1] . '",
+            "array" : []
+        }';
+
+        $convert = json_decode($data);
+
         $post = new Post;
         $post->user_id = auth()->user()->id;
         $post->template_id = $request->id;
         $post->slug = Str::slug('post slug');
-        $post->thumbnail = $request->thumbnail;
+        $post->thumbnail = 'post-thumbnails/' . $convert->file;
         $post->lb_content = $request->content;
         $post->save();
 

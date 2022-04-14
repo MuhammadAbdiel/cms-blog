@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function profile()
+    public function index()
     {
         return view('dashboard.profile.index', [
             'title' => 'Profile',
-            'user' => User::where('id', auth()->user()->id)->first(),
+            'user' => auth()->user(),
         ]);
     }
 
@@ -26,11 +26,11 @@ class ProfileController extends Controller
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
-            $user->profileImage = $request->file('profileImage')->store('profile-image');
+            $validateData['profileImage'] =  $request->file('profileImage')->store('profile-image');
         }
 
-        User::where('id', auth()->user()->id)->update($validateData);
+        User::where('id', $user->id)->update($validateData);
 
-        return redirect('/dashboard/profile')->with('success', 'Profile image updated successfully!');
+        return redirect('/dashboard/profile/user')->with('success', 'Profile image updated successfully!');
     }
 }

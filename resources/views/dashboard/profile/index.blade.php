@@ -133,22 +133,25 @@
                                     </div>
 
                                     <div class="pt-2">
-                                        <form action="/dashboard/profile/image/{{ auth()->user()->id }}" method="POST"
+                                        <form action="/dashboard/profile/user/{{ $user->username }}" method="POST"
                                             enctype="multipart/form-data" class="d-inline-block">
-                                            @csrf
                                             @method('PUT')
+                                            @csrf
                                             <input type="file" name="profileImage" class="form-control mt-2 mb-2"
                                                 id="profileImage" onchange="previewImage()">
-                                            <button type="submit" class="btn btn-primary btn-sm"><i
-                                                    class="bi bi-upload"></i></button>
+                                            <button style="display: none;" type="submit" id="update-button"
+                                                class="btn btn-primary btn-sm"><i class="bi bi-upload"></i></button>
                                         </form>
-                                        {{-- <form class="d-inline-block" id="delete-photo" action="" method="post">
+                                        <form class="d-inline-block" action="" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                        </form> --}}
-                                        <a onclick="event.preventDefault();
-                                                    document.getElementById('delete-photo').submit();"
-                                            class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                                        </form>
+
+                                        @if ($user->profileImage)
+                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                class="bi bi-trash"></i></button>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -232,8 +235,10 @@
     function previewImage() {
         const imgPreview = document.querySelector('.img-preview');
         const profileImage = document.querySelector('#profileImage');
+        const updateButton = document.querySelector('#update-button');
 
         imgPreview.style.display = 'block';
+        updateButton.style.display = 'inline-block';
 
         const oFReader = new FileReader();
         oFReader.readAsDataURL(profileImage.files[0]);

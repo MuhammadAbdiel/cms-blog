@@ -39,7 +39,8 @@
 
                                 <p class="card-text"></p>
                                 <a href="/dashboard/templates/{{ $template->id }}" class="badge bg-info">Show</a>
-                                <form action="/dashboard/posts" method="post" class="d-inline-block">
+                                <form action="/dashboard/posts" method="post" class="d-inline-block"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $template->id }}">
 
