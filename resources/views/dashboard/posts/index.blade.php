@@ -20,8 +20,11 @@
             <div class="card-body">
                 <h5 class="card-title">Posts</h5>
 
+                @if (!auth()->user()->is_admin)
                 <a class="btn btn-primary" href="/dashboard/posts/create"><i class="bi bi-cursor-fill"></i> Select
                     Template</a>
+                @endif
+
                 <hr>
 
                 <div class="row justify-content-center">

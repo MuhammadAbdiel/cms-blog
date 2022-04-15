@@ -40,6 +40,10 @@ class PostController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->is_admin) {
+            abort(403);
+        }
+
         return view('dashboard.posts.create', [
             'title' => 'Select Template',
             'templates' => Template::latest()->get(),
@@ -133,7 +137,7 @@ class PostController extends Controller
         }
 
         $post->category_id = $request->category_id;
-        $post->excerpt = Str::limit(strip_tags($post->template->lb_content), 200);
+        $post->excerpt = Str::limit(strip_tags($post->lb_content), 200);
         $post->lb_content = $request->content;
 
         $postThumbnail = explode('/', $post->thumbnail);

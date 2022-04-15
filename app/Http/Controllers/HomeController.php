@@ -56,7 +56,7 @@ class HomeController extends Controller
     {
         return view('authors', [
             'title' => 'Authors',
-            'authors' => User::all()
+            'authors' => User::where('is_admin', false)->get()
         ]);
     }
 }

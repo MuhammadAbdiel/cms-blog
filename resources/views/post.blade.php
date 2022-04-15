@@ -5,6 +5,7 @@
 @if ($post->lb_raw_content)
 {!! $post->lb_raw_content !!}
 @else
+
 <div class="container">
     <div class="row justify-content-center mb-5">
         <div class="col-md-8">

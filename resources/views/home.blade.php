@@ -24,6 +24,7 @@
     </div>
 </div>
 
+@if ($posts->count() > 0)
 <div class="card mb-5">
     <div class="position-absolute px-3 py-2 text-white" style="background-color: rgba(0, 0, 0, 0.7)"><a
             class="text-decoration-none text-white" href="/?category={{ $posts[0]->category->slug }}">
@@ -72,6 +73,7 @@
     @endforeach
 
 </div>
+@endif
 
 <div class="d-flex justify-content-end">
     {{ $posts->links() }}
