@@ -29,11 +29,11 @@ Route::get('/{post}', [HomeController::class, 'post']);
 
 Route::get('/dashboard/home', [DashboardHomeController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/posts/checkSlug', [PostController::class, 'checkSlug'])->middleware('auth');
-Route::get('/dashboard/categories/checkSlug', [CategoryController::class, 'checkSlug'])->middleware('auth');
+Route::get('/dashboard/categories/checkSlug', [CategoryController::class, 'checkSlug'])->middleware('admin');
 Route::resource('/dashboard/posts', PostController::class)->middleware('auth');
-Route::resource('/dashboard/templates', TemplateController::class)->middleware('auth');
-Route::resource('/dashboard/categories', CategoryController::class)->middleware('auth')->except(['show']);
-Route::resource('/dashboard/users', UserController::class)->middleware('auth')->except(['show', 'create', 'store', 'edit', 'update']);
+Route::resource('/dashboard/templates', TemplateController::class)->middleware('admin');
+Route::resource('/dashboard/categories', CategoryController::class)->middleware('admin')->except(['show']);
+Route::resource('/dashboard/users', UserController::class)->middleware('admin')->except(['show', 'create', 'store', 'edit', 'update']);
 
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->middleware('auth');
 Route::put('/dashboard/profile/update', [ProfileController::class, 'updateProfile'])->middleware('auth');

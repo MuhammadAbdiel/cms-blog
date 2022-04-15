@@ -32,7 +32,8 @@ class CategoryController extends Controller
     public function create()
     {
         return view('dashboard.categories.create', [
-            'title' => 'Create Category'
+            'title' => 'Create Category',
+            'user' => auth()->user(),
         ]);
     }
 
@@ -74,7 +75,8 @@ class CategoryController extends Controller
     {
         return view('dashboard.categories.edit', [
             'title' => 'Edit Category',
-            'category' => $category
+            'category' => $category,
+            'user' => auth()->user(),
         ]);
     }
 

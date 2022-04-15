@@ -18,6 +18,7 @@
         </li>
         <!-- End Components Nav -->
 
+        @can('admin')
         <!-- <li class="nav-heading">Pages</li> -->
         <li class="nav-item">
             <a class="nav-link {{ Request::is('dashboard/users*') ? '' : 'collapsed' }}" href="/dashboard/users">
@@ -44,6 +45,7 @@
             </a>
         </li>
         <!-- End Tables Nav -->
+        @endcan
 
     </ul>
 </aside>

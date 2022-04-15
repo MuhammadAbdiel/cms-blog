@@ -20,9 +20,15 @@ class PostController extends Controller
      */
     public function index()
     {
+        $posts = Post::latest();
+
+        if (!auth()->user()->is_admin) {
+            $posts = Post::where('user_id', auth()->user()->id);
+        }
+
         return view('dashboard.posts.index', [
             'title' => 'Posts',
-            'posts' => Post::latest()->paginate(6),
+            'posts' => $posts->paginate(6),
             'user' => auth()->user(),
         ]);
     }
@@ -36,7 +42,8 @@ class PostController extends Controller
     {
         return view('dashboard.posts.create', [
             'title' => 'Select Template',
-            'templates' => Template::latest()->get()
+            'templates' => Template::latest()->get(),
+            'user' => auth()->user(),
         ]);
     }
 
@@ -79,7 +86,8 @@ class PostController extends Controller
     {
         return view('dashboard.posts.show', [
             'title' => 'Show Post',
-            'post' => $post
+            'post' => $post,
+            'user' => auth()->user(),
         ]);
     }
 
@@ -95,6 +103,7 @@ class PostController extends Controller
             'title' => 'Edit Post',
             'post' => $post,
             'categories' => Category::latest()->get(),
+            'user' => auth()->user(),
         ]);
     }
 

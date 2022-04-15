@@ -34,6 +34,7 @@ class TemplateController extends Controller
     {
         return view('dashboard.templates.create', [
             'title' => 'Create Template',
+            'user' => auth()->user(),
         ]);
     }
 
@@ -76,6 +77,7 @@ class TemplateController extends Controller
         return view('dashboard.templates.show', [
             'title' => 'Show Template',
             'template' => $template,
+            'user' => auth()->user(),
         ]);
     }
 
@@ -90,6 +92,7 @@ class TemplateController extends Controller
         return view('dashboard.templates.edit', [
             'title' => 'Edit Template',
             'template' => $template,
+            'user' => auth()->user(),
         ]);
     }
 
