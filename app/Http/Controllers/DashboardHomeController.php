@@ -14,6 +14,7 @@ class DashboardHomeController extends Controller
     {
         return view('dashboard.index', [
             'title' => 'Home',
+            'user' => auth()->user(),
             'posts' => Post::all()->count(),
             'categories' => Category::all()->count(),
             'authors' => User::all()->count(),

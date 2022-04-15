@@ -21,7 +21,14 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+
+                    @if ($user->imageProfile)
+                    <img src="{{ asset('storage/' . $user->imageProfile) }}" alt="Profile" class="rounded-circle"
+                        width="30" height="30">
+                    @else
                     <img src="/assets/img/profile.png" alt="Profile" class="rounded-circle" width="30" height="30">
+                    @endif
+
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->name }}</span>
                 </a>
                 <!-- End Profile Image Icon -->
@@ -35,7 +42,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="/dashboard/profile/user">
+                        <a class="dropdown-item d-flex align-items-center" href="/dashboard/profile/">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>

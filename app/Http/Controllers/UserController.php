@@ -17,6 +17,7 @@ class UserController extends Controller
         return view('dashboard.user.index', [
             'title' => 'Users',
             'users' => User::latest()->get()->except(auth()->user()->id),
+            'user' => auth()->user(),
         ]);
     }
 

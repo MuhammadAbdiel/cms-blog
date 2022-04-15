@@ -19,7 +19,8 @@ class CategoryController extends Controller
     {
         return view('dashboard.categories.index', [
             'title' => 'Categories',
-            'categories' => Category::latest()->get()
+            'categories' => Category::latest()->get(),
+            'user' => auth()->user(),
         ]);
     }
 

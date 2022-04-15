@@ -21,6 +21,7 @@ class TemplateController extends Controller
         return view('dashboard.templates.index', [
             'title' => 'Templates',
             'templates' => Template::latest()->get(),
+            'user' => auth()->user(),
         ]);
     }
 

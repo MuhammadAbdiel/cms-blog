@@ -22,7 +22,8 @@ class PostController extends Controller
     {
         return view('dashboard.posts.index', [
             'title' => 'Posts',
-            'posts' => Post::latest()->paginate(6)
+            'posts' => Post::latest()->paginate(6),
+            'user' => auth()->user(),
         ]);
     }
 
