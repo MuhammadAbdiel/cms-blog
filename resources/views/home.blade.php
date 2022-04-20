@@ -31,7 +31,7 @@
             {{ $posts[0]->category->name }}</a></div>
 
     @if ($posts[0]->thumbnail)
-    <img src="{{ asset('storage/' . $posts[0]->thumbnail) }}" class="card-img-top" height="400" width="1200">
+    <img src="{{ asset('storage/' . $posts[0]->thumbnail) }}" class="card-img-top img-fluid first-post">
     @else
     <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}" class="card-img-top">
     @endif
@@ -57,7 +57,13 @@
             <div class="position-absolute px-3 py-2 text-white" style="background-color: rgba(0, 0, 0, 0.7)"><a
                     class="text-decoration-none text-white" href="/?category={{ $post->category->slug }}">
                     {{ $post->category->name }}</a></div>
+
+            @if ($post->thumbnail)
+            <img src="{{ asset('storage/' . $post->thumbnail) }}" class="card-img-top img-fluid many-posts">
+            @else
             <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}" class="card-img-top">
+            @endif
+
             <div class="card-body text-center">
                 <h5 class="card-title">{{ $post->title }}</h5>
                 <small>
