@@ -12,6 +12,18 @@
 </div>
 @endsection
 
+@section('style')
+<style>
+    i.my-handle {
+        cursor: grab;
+    }
+
+    i.my-handle:active {
+        cursor: grabbing;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-lg-12">
