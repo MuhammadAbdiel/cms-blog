@@ -37,6 +37,9 @@
     {{-- Dragula CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/dragula/css/dragula.min.css') }}">
 
+    {{-- Bootstrap Icons --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
     @yield('style')
 </head>
 
@@ -122,8 +125,14 @@
     {{-- Dragula JS --}}
     <script src="{{ asset('assets/dragula/js/dragula.min.js') }}"></script>
 
+    {{-- Sortable JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    {{-- <script src="../node_modules/sortablejs/Sortable.js"></script> --}}
+
     {{-- Custom JS --}}
-    <script src="{{ asset('assets/dragula/js/script.js') }}"></script>
+    <script src="{{ asset('assets/dragula/js/post.js') }}"></script>
+    <script src="{{ asset('assets/dragula/js/template.js') }}"></script>
+    <script src="{{ asset('assets/dragula/js/user.js') }}"></script>
 
     <!-- Vendor JS Files -->
     <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>

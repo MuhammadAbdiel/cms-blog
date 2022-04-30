@@ -24,14 +24,22 @@
                     Template</a>
                 <hr>
 
-                <div class="row justify-content-center">
+                <div class="row justify-content-center" id="template">
 
                     @foreach ($templates as $template)
                     <div class="col-md-4">
                         <div class="card">
                             <img src="" class="card-img-top">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $template->name }}</h5>
+
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col-10">
+                                        <h5 class="card-title">{{ $template->name }}</h5>
+                                    </div>
+                                    <div class="col" style="text-align: right;">
+                                        <i class="bi bi-arrows-move my-handle"></i>
+                                    </div>
+                                </div>
 
                                 @if ($template->thumbnail)
                                 <img src="{{ asset('storage/' . $template->thumbnail) }}" class="card-img-top mb-3">

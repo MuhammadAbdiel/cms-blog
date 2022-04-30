@@ -24,6 +24,7 @@
                 <table class="table datatable">
                     <thead>
                         <tr>
+                            <th scope="col"></th>
                             <th scope="col">No.</th>
                             <th scope="col">Name</th>
                             <th scope="col">Username</th>
@@ -33,7 +34,7 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="user">
 
                         @foreach ($users as $user)
                         <tr>
@@ -42,6 +43,7 @@
                             $post = $user->posts()->count();
                             @endphp
 
+                            <th><i class="bi bi-arrows-move my-handle"></i></th>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->username }}</td>

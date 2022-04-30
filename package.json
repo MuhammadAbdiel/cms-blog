@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "froala-editor": "^4.0.10",
+        "sortablejs": "^1.15.0",
         "sweetalert2": "^11.4.6"
     }
 }

@@ -27,14 +27,22 @@
 
                 <hr>
 
-                <div class="row justify-content-center">
+                <div class="row justify-content-center" id="post">
 
                     @foreach ($posts as $post)
-                    <div class="col-md-4">
-                        <div class="card">
+                    <div id="col-{{ $loop->iteration }}" class="col-md-4">
+                        <div id="card-{{ $loop->iteration }}" class="card">
                             <img src="" class="card-img-top">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $post->title }}</h5>
+
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col-10">
+                                        <h5 class="card-title">{{ $post->title }}</h5>
+                                    </div>
+                                    <div class="col" style="text-align: right;">
+                                        <i class="bi bi-arrows-move my-handle"></i>
+                                    </div>
+                                </div>
 
                                 @if ($post->thumbnail)
                                 <img src="{{ asset('storage/' . $post->thumbnail) }}" class="card-img-top mb-3">
@@ -62,45 +70,6 @@
                 <div class="d-flex justify-content-end">
                     {{ $posts->links() }}
                 </div>
-
-                <!-- Table with stripped rows -->
-                {{-- <table class="table datatable">
-                    <thead>
-                        <tr>
-                            <th scope="col">No.</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Updated</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach ($posts as $post)
-                        <tr>
-                            <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $post->title }}</td>
-                            <td>{{ $post->updated_at }}</td>
-                            <td>
-                                <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-info mb-1"><i
-                                        class="bi bi-eye-fill"></i> Show</a><br>
-                                <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning mb-1"><i
-                                        class="bi bi-pencil-square"></i>
-                                    Edit</a>
-                                <form id="data-{{ $post->slug }}" action="/dashboard/posts/{{ $post->slug }}"
-                                    method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" data-title="{{ $post->title }}" data-slug="{{ $post->slug }}"
-                                        class="btn btn-danger delete"><i class="bi bi-trash"></i>
-                                        Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table> --}}
-                <!-- End Table with stripped rows -->
 
             </div>
         </div>
