@@ -34,6 +34,9 @@
     <link href='https://cdn.jsdelivr.net/npm/froala-editor@4.0.8/css/froala_editor.pkgd.min.css' rel='stylesheet'
         type='text/css' />
 
+    {{-- Dragula CSS --}}
+    <link rel="stylesheet" href="{{ asset('assets/dragula/css/dragula.min.css') }}">
+
     @yield('style')
 </head>
 
@@ -115,6 +118,12 @@
     {{-- Jquery --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    {{-- Dragula JS --}}
+    <script src="{{ asset('assets/dragula/js/dragula.min.js') }}"></script>
+
+    {{-- Custom JS --}}
+    <script src="{{ asset('assets/dragula/js/script.js') }}"></script>
 
     <!-- Vendor JS Files -->
     <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
