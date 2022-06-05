@@ -107,8 +107,9 @@
     <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@4.0.8/js/froala_editor.pkgd.min.js'>
     </script>
 
-    <script src="https://unpkg.com/react@16.8.6/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js"></script>
+    {{-- React JS CDN --}}
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
     {{-- Laraberg JS --}}
     <script src="{{ asset('vendor/laraberg/js/laraberg.js') }}"></script>
@@ -121,6 +122,9 @@
     {{-- Jquery --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    {{-- Laravel File Manager --}}
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 
     {{-- Dragula JS --}}
     <script src="{{ asset('assets/dragula/js/dragula.min.js') }}"></script>

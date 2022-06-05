@@ -1,5 +1,13 @@
 @extends('dashboard.layouts.main')
 
+@section('style')
+<style>
+    a#lfm:hover {
+        background-color: #DDE0E3 !important;
+    }
+</style>
+@endsection
+
 @section('breadcrumb')
 <div class="pagetitle">
     <h1>Posts</h1>
@@ -70,9 +78,28 @@
                         <img class="img-preview img-fluid mb-3" width="300">
                         @endif
 
+                        {{-- <iframe src="/laravel-filemanager"
+                            style="width: 100%; height: 500px; overflow: hidden; border: none;"></iframe> --}}
                         <input class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail"
                             type="file" id="thumbnail" onchange="previewImage()">
                         @error('thumbnail')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+
+                        <img id="holder" style="margin-top:15px; margin-bottom: 10px; max-height:300px;">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <a id="lfm" data-input="image-thumbnail" data-preview="holder"
+                                    style="background-color: #E9ECEF; border: 1px solid #CED4DA" class="btn">
+                                    Choose File
+                                </a>
+                            </span>
+                            <input id="image-thumbnail" class="form-control" type="text" name="filepath" {{--
+                                onchange="imagePreview()" --}}>
+                        </div>
+                        @error('image-thumbnail')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -121,6 +148,70 @@
             imgPreview.src = oFREvent.target.result;
         };
     }
+</script>
+@endsection
+
+@section('script')
+<script>
+    // $('#lfm').filemanager('image');
+
+    let lfm = function(id, type, options) {
+        let button = document.getElementById(id);
+        
+        button.addEventListener('click', function () {
+            let route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';
+            let target_input = document.getElementById(button.getAttribute('data-input'));
+            let target_preview = document.getElementById(button.getAttribute('data-preview'));
+            
+            window.open(route_prefix + '?type=' + type || 'file', 'FileManager', 'width=900,height=600');
+            window.SetUrl = function (items) {
+                let file_path = items.map(function (item) {
+                    return item.url;
+                }).join(',');
+                
+                // set the value of the desired input to image url
+                target_input.value = file_path;
+                target_input.dispatchEvent(new Event('change'));
+                
+                // clear previous preview
+                target_preview.innerHtml = '';
+                
+                // set or change the preview image src
+                items.forEach(function (item) {
+                    const holder = document.querySelector('#holder');
+                    holder.setAttribute('src', item.thumb_url);
+                    // let img = document.createElement('img')
+                    // img.setAttribute('style', 'height: 5rem')
+                    // img.setAttribute('src', item.thumb_url)
+                    // // img.setAttribute('id', 'holder')
+                    target_preview.appendChild(holder);
+                });
+                
+                // trigger change event
+                target_preview.dispatchEvent(new Event('change'));
+            };
+        });
+    };
+
+    let route_prefix = "/filemanager";
+    lfm('lfm', 'image', {prefix: route_prefix});
+
+    // var route_prefix = "laravel-filemanager";
+    // $('#lfm').filemanager('image', {prefix: route_prefix});
+
+    // function imagePreview() {
+    //     const holder = document.querySelector('#holder');
+    //     const imageThumbnail = document.querySelector('#image-thumbnail');
+        
+    //     holder.style.display = 'block';
+        
+    //     const oFReader = new FileReader();
+    //     oFReader.readAsDataURL(imageThumbnail.files[0]);
+        
+    //     oFReader.onload = function (oFREvent) {
+    //         holder.src = oFREvent.target.result;
+    //     };
+    // }
 </script>
 @endsection
 

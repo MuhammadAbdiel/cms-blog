@@ -15,7 +15,11 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.images.index', [
+            'title' => 'Images',
+            'images' => Image::all(),
+            'user' => auth()->user(),
+        ]);
     }
 
     /**

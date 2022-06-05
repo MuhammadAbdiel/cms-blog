@@ -137,8 +137,8 @@ class PostController extends Controller
         }
 
         $post->category_id = $request->category_id;
-        $post->excerpt = Str::limit(strip_tags($post->lb_content), 200);
         $post->lb_content = $request->content;
+        $post->excerpt = Str::limit(strip_tags($post->lb_content), 200);
 
         $postThumbnail = explode('/', $post->thumbnail);
 

@@ -3,11 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardHomeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ Route::put('/dashboard/profile/update', [ProfileController::class, 'updateProfil
 Route::put('/dashboard/profile/image', [ProfileController::class, 'updateImage'])->middleware('auth');
 Route::delete('/dashboard/profile/image/delete', [ProfileController::class, 'deleteImage'])->middleware('auth');
 Route::put('/dashboard/profile/password', [ProfileController::class, 'changePassword'])->middleware('auth');
+
+// Route::get('/dashboard/images', [ImageController::class, 'index'])->middleware('auth');
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
