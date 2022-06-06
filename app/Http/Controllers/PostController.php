@@ -123,7 +123,8 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'category_id' => 'required',
-            'thumbnail' => 'image|file|max:5120',
+            // 'thumbnail' => 'image|file|max:5120',
+            'image_thumbnail' => 'required'
         ]);
 
         $post->user_id = auth()->user()->id;
@@ -139,17 +140,19 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
         $post->lb_content = $request->content;
         $post->excerpt = Str::limit(strip_tags($post->lb_content), 200);
+        $post->thumbnail = null;
+        $post->image_thumbnail = $request->image_thumbnail;
 
-        $postThumbnail = explode('/', $post->thumbnail);
+        // $postThumbnail = explode('/', $post->thumbnail);
 
-        if ($request->file('thumbnail')) {
-            if (Storage::disk()->exists('post-thumbnails/' . $postThumbnail[1])) {
-                if ($request->oldThumbnail) {
-                    Storage::delete($request->oldThumbnail);
-                }
-            }
-            $post->thumbnail = $request->file('thumbnail')->store('post-thumbnails');
-        }
+        // if ($request->file('thumbnail')) {
+        //     if (Storage::disk()->exists('post-thumbnails/' . $postThumbnail[1])) {
+        //         if ($request->oldThumbnail) {
+        // Storage::delete($request->oldThumbnail);
+        //         }
+        //     }
+        //     $post->thumbnail = $request->file('thumbnail')->store('post-thumbnails');
+        // }
 
         $post->update();
 

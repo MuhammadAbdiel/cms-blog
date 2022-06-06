@@ -69,37 +69,45 @@
                     </div>
                     <div class="col-12">
                         <label for="thumbnail" class="form-label">Thumbnail</label>
-                        <input type="hidden" name="oldThumbnail" value="{{ $post->thumbnail }}">
+                        {{-- <input type="hidden" name="oldThumbnail" value="{{ $post->thumbnail }}"> --}}
 
-                        @if ($post->thumbnail)
+                        {{-- @if ($post->thumbnail)
                         <img src="{{ asset('storage/' . $post->thumbnail) }}" class="img-preview img-fluid mb-3 d-block"
                             width="300">
                         @else
                         <img class="img-preview img-fluid mb-3" width="300">
-                        @endif
+                        @endif --}}
 
                         {{-- <iframe src="/laravel-filemanager"
                             style="width: 100%; height: 500px; overflow: hidden; border: none;"></iframe> --}}
-                        <input class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail"
+
+                        {{-- <input class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail"
                             type="file" id="thumbnail" onchange="previewImage()">
                         @error('thumbnail')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
-                        @enderror
+                        @enderror --}}
 
-                        <img id="holder" style="margin-top:15px; margin-bottom: 10px; max-height:300px;">
+                        @if ($post->image_thumbnail)
+                        <img src="{{ $post->image_thumbnail }}" id="holder" class="d-block"
+                            style="margin-top:15px; margin-bottom: 10px; max-height:300px;">
+                        @else
+                        <img class="d-block" id="holder"
+                            style="margin-top:15px; margin-bottom: 10px; max-height:300px;">
+                        @endif
+
                         <div class="input-group">
                             <span class="input-group-btn">
-                                <a id="lfm" data-input="image-thumbnail" data-preview="holder"
+                                <a id="lfm" data-input="image_thumbnail" data-preview="holder"
                                     style="background-color: #E9ECEF; border: 1px solid #CED4DA" class="btn">
                                     Choose File
                                 </a>
                             </span>
-                            <input id="image-thumbnail" class="form-control" type="text" name="filepath" {{--
-                                onchange="imagePreview()" --}}>
+                            <input value="{{ old('image_thumbnail', $post->image_thumbnail) }}" id="image_thumbnail"
+                                class="form-control" type="text" name="image_thumbnail">
                         </div>
-                        @error('image-thumbnail')
+                        @error('image_thumbnail')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

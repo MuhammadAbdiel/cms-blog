@@ -47,12 +47,12 @@
         <!-- End Tables Nav -->
         @endcan
 
-        {{-- <li class="nav-item">
-            <a class="nav-link {{ Request::is('dashboard/images*') ? '' : 'collapsed' }}" href="/dashboard/images">
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/filemanager?type=image" target="_blank">
                 <i class="bi bi-card-image"></i>
                 <span>Images</span>
             </a>
-        </li> --}}
+        </li>
 
     </ul>
 </aside>

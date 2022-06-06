@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('excerpt')->nullable();
             $table->text('body')->nullable();
             $table->text('thumbnail')->nullable();
+            $table->text('image_thumbnail')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

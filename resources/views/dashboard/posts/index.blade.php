@@ -56,8 +56,15 @@
                                     </div>
                                 </div>
 
-                                @if ($post->thumbnail)
+                                {{-- @if ($post->thumbnail)
                                 <img src="{{ asset('storage/' . $post->thumbnail) }}" class="card-img-top mb-3">
+                                @else
+                                <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}"
+                                    class="card-img-top mb-3">
+                                @endif --}}
+
+                                @if ($post->image_thumbnail)
+                                <img src="{{ $post->image_thumbnail }}" class="card-img-top mb-3">
                                 @else
                                 <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}"
                                     class="card-img-top mb-3">
