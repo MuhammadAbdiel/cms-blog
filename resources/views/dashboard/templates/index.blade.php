@@ -53,10 +53,16 @@
                                     </div>
                                 </div>
 
-                                @if ($template->thumbnail)
+                                {{-- @if ($template->thumbnail)
                                 <img src="{{ asset('storage/' . $template->thumbnail) }}" class="card-img-top mb-3">
                                 @else
                                 <img src="https://source.unsplash.com/500x400?template" class="card-img-top mb-3">
+                                @endif --}}
+
+                                @if ($template->image_thumbnail)
+                                <img src="{{ $template->image_thumbnail }}" class="card-img-top mb-3">
+                                @else
+                                <img src="https://source.unsplash.com/500x400?technology" class="card-img-top mb-3">
                                 @endif
 
                                 <p class="card-text"></p>

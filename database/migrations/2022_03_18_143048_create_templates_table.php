@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('name');
             $table->text('thumbnail')->nullable();
+            $table->text('image_thumbnail')->nullable();
             $table->timestamps();
         });
     }

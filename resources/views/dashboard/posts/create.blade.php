@@ -31,10 +31,16 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $template->name }}</h5>
 
-                                @if ($template->thumbnail)
+                                {{-- @if ($template->thumbnail)
                                 <img src="{{ asset('storage/' . $template->thumbnail) }}" class="card-img-top mb-3">
                                 @else
                                 <img src="https://source.unsplash.com/500x400?template" class="card-img-top mb-3">
+                                @endif --}}
+
+                                @if ($template->image_thumbnail)
+                                <img src="{{ $template->image_thumbnail }}" class="card-img-top mb-3">
+                                @else
+                                <img src="https://source.unsplash.com/500x400?technology" class="card-img-top mb-3">
                                 @endif
 
                                 <p class="card-text"></p>
@@ -44,9 +50,14 @@
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $template->id }}">
 
-                                    @if ($template->thumbnail)
-                                    <input type="hidden" name="thumbnail" value="{{ $template->thumbnail }}">
+                                    @if ($template->image_thumbnail)
+                                    <input type="hidden" name="image_thumbnail"
+                                        value="{{ $template->image_thumbnail }}">
                                     @endif
+
+                                    {{-- @if ($template->thumbnail)
+                                    <input type="hidden" name="thumbnail" value="{{ $template->thumbnail }}">
+                                    @endif --}}
 
                                     <input type="hidden" name="content" value="{{ $template->lb_raw_content }}">
                                     <button type="submit" class="badge bg-success border-0">Select Template</button>

@@ -56,10 +56,12 @@ class TemplateController extends Controller
         $template->user_id = auth()->user()->id;
         $template->name = $request->name;
         $template->lb_content = $request->content;
+        $template->thumbnail = null;
+        $template->image_thumbnail = $request->image_thumbnail;
 
-        if ($request->file('thumbnail')) {
-            $template->thumbnail = $request->file('thumbnail')->store('template-thumbnails');
-        }
+        // if ($request->file('thumbnail')) {
+        //     $template->thumbnail = $request->file('thumbnail')->store('template-thumbnails');
+        // }
 
         $template->save();
 
@@ -118,14 +120,16 @@ class TemplateController extends Controller
             $template->name = $request->name;
         }
 
-        if ($request->file('thumbnail')) {
-            if ($request->oldThumbnail) {
-                Storage::delete($request->oldThumbnail);
-            }
-            $template->thumbnail = $request->file('thumbnail')->store('template-thumbnails');
-        }
+        // if ($request->file('thumbnail')) {
+        //     if ($request->oldThumbnail) {
+        //         Storage::delete($request->oldThumbnail);
+        //     }
+        //     $template->thumbnail = $request->file('thumbnail')->store('template-thumbnails');
+        // }
 
         $template->lb_content = $request->content;
+        $template->thumbnail = null;
+        $template->image_thumbnail = $request->image_thumbnail;
         $template->update();
 
         return redirect('/dashboard/templates')->with('success', 'Template updated successfully!');

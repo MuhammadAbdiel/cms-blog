@@ -91,10 +91,9 @@
 
                         @if ($post->image_thumbnail)
                         <img src="{{ $post->image_thumbnail }}" id="holder" class="d-block"
-                            style="margin-top:15px; margin-bottom: 10px; max-height:300px;">
+                            style="margin-bottom: 10px; max-height:300px;">
                         @else
-                        <img class="d-block" id="holder"
-                            style="margin-top:15px; margin-bottom: 10px; max-height:300px;">
+                        <img class="d-block" id="holder" style="margin-bottom: 10px; max-height:300px;">
                         @endif
 
                         <div class="input-group">
@@ -104,8 +103,9 @@
                                     Choose File
                                 </a>
                             </span>
-                            <input value="{{ old('image_thumbnail', $post->image_thumbnail) }}" id="image_thumbnail"
-                                class="form-control" type="text" name="image_thumbnail">
+                            <input readonly value="{{ old('image_thumbnail', $post->image_thumbnail) }}"
+                                id="image_thumbnail" class="form-control @error('image_thumbnail') is-invalid @enderror"
+                                type="text" name="image_thumbnail">
                         </div>
                         @error('image_thumbnail')
                         <div class="invalid-feedback">
