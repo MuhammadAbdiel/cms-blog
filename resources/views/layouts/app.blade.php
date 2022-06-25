@@ -36,7 +36,8 @@
 <body>
     <div id="app">
 
-        @if (Request::is('/') || Request::is('categories') || Request::is('authors') || Request::is('login') ||
+        @if (Request::is('/') || Request::is('posts') || Request::is('categories') || Request::is('authors') ||
+        Request::is('login') ||
         Request::is('register'))
         @include('layouts.navbar')
         @endif
@@ -51,7 +52,7 @@
             </div>
         </main>
 
-        @if (Request::is('/') || Request::is('categories') || Request::is('authors'))
+        @if (Request::is('/') || Request::is('posts') || Request::is('categories') || Request::is('authors'))
         <footer class="sticky-bottom">
             <hr>
             <div class="container text-center">

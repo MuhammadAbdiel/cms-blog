@@ -24,6 +24,7 @@ use App\Http\Controllers\DashboardHomeController;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/posts', [HomeController::class, 'posts']);
 Route::get('/categories', [HomeController::class, 'categories']);
 Route::get('/authors', [HomeController::class, 'authors']);
 Route::get('/{post}', [HomeController::class, 'post']);

@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $heading = 'All Posts';
+        $heading = 'Posts';
 
         if (request()->has('category')) {
             $category = Category::where('slug', request()->category)->firstOrFail();
@@ -30,6 +30,27 @@ class HomeController extends Controller
 
         return view('home', [
             'title' => 'Home',
+            'heading' => $heading,
+            'posts' => Post::latest()->where('slug', '!=', null)->filter(request(['search', 'category', 'author']))->take(9)->get(),
+        ]);
+    }
+
+    public function posts()
+    {
+        $heading = 'All Posts';
+
+        if (request()->has('category')) {
+            $category = Category::where('slug', request()->category)->firstOrFail();
+            $heading = "Posts in {$category->name}";
+        }
+
+        if (request()->has('author')) {
+            $author = User::where('username', request()->author)->firstOrFail();
+            $heading = "Posts by {$author->name}";
+        }
+
+        return view('posts', [
+            'title' => 'Posts',
             'heading' => $heading,
             'posts' => Post::latest()->where('slug', '!=', null)->filter(request(['search', 'category', 'author']))->paginate(9)->withQueryString(),
         ]);

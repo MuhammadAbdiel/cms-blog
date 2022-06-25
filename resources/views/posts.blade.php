@@ -5,7 +5,7 @@
 
 <div class="row justify-content-center mb-3 mt-5">
     <div class="col-md-6">
-        <form action="/">
+        <form action="/posts">
 
             @if (request()->has('category'))
             <input type="hidden" name="category" value="{{ request('category') }}">
@@ -93,4 +93,7 @@
 </div>
 @endif
 
+<div class="d-flex justify-content-end">
+    {{ $posts->links() }}
+</div>
 @endsection

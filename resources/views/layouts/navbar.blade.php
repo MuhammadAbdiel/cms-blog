@@ -15,6 +15,9 @@
                     <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ Request::is('posts') ? 'active' : '' }}" href="/posts">All Posts</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ Request::is('categories') ? 'active' : '' }}" href="/categories">Category</a>
                 </li>
                 <li class="nav-item">
