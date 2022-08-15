@@ -2,7 +2,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="/dashboard/home" class="logo d-flex align-items-center">
-            <span class="d-none d-lg-block">Blog App</span>
+            <span class="d-none d-lg-block">Blog Management</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>
